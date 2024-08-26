@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import *
+from .forms import TaskEntryForm
 
 # Create your views here.
 def index(request):
@@ -11,6 +12,27 @@ def index(request):
         "title":" Task Management"
     }
     return render(request,"taskManagement/taskmanagementHome.html",context=context)
+
+def new(request):
+    if request.method == 'POST':
+        form = TaskEntryForm(request.POST)
+        if form.is_valid():
+            newTask = Task()
+            newTask.title = form.title
+            newTask.description = form.description
+            newTask.due_date = form.due_date
+            newTask.category = form.category
+            newTask.save()
+            return HttpResponse(f"<h1> Successfully Saved {newTask.title}")
+    else:
+        form = TaskEntryForm()
+    
+    context = {
+        "title":"New Task Entry",
+        "form":form
+    }
+    return render(request, "taskManagement/entryForm.html", context)
+
 
 def home (request):
     context = {
