@@ -1,0 +1,15 @@
+{% extends "taskManagement/main.html" %}
+
+
+{% block navigation %}
+
+{% endblock %}
+
+
+{% block title %}{{title}} - Test {% endblock %}
+{% block content %}
+    {% for task in tasks  %}
+        <br> 
+        <li> {{task}} </li>
+    {% endfor %}
+{% endblock %}
