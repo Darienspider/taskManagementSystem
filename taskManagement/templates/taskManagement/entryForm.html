@@ -1,7 +1,10 @@
 {% extends "taskManagement/main.html" %}
 
-<form action="/success/" method="post">
+{% block content %}
+{% comment %} create a success page (maybe confetti or something) {% endcomment %}
+<form action="/success/" method="POST">
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <input type="submit" value="Submit">
 </form>
+{% endblock %}

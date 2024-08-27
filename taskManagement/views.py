@@ -17,21 +17,23 @@ def new(request):
     if request.method == 'POST':
         form = TaskEntryForm(request.POST)
         if form.is_valid():
-            newTask = Task()
-            newTask.title = form.title
-            newTask.description = form.description
-            newTask.due_date = form.due_date
-            newTask.category = form.category
-            newTask.save()
-            return HttpResponse(f"<h1> Successfully Saved {newTask.title}")
+            new_task = Task(
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                due_date=form.cleaned_data['due_date'],
+                category=form.cleaned_data['category']
+            )
+            new_task.save()
+            return HttpResponse(f"<h1>Successfully Saved {new_task.title}</h1>")
     else:
         form = TaskEntryForm()
-    
+
     context = {
-        "title":"New Task Entry",
-        "form":form
+        "title": "New Task Entry",
+        "form": form
     }
     return render(request, "taskManagement/entryForm.html", context)
+
 
 
 def home (request):
