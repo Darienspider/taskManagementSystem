@@ -4,7 +4,7 @@ Develop a Personal Task Management System where users can create, track, and man
 
 ## Key Features:
   ### User Authentication:
-       - TODO: Implement [user registration] and [login] so that users can manage their own tasks. // COMPLETED
+  - TODO: Implement [user registration] and [login] so that users can manage their own tasks. // COMPLETED
 Task Creation and Management: 
 
 
