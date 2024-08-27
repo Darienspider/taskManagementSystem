@@ -3,7 +3,7 @@
 Develop a Personal Task Management System where users can create, track, and manage their tasks or to-do lists. This application will help users organize their daily activities, set reminders, and track task completion.
 
 ## Key Features:
-  ###User Authentication:
+  ### User Authentication:
        TODO: Implement [user registration] and [login] so that users can manage their own tasks. // COMPLETED
 Task Creation and Management: 
 
