@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import *
-from .forms import TaskEntryForm
+from .forms import TaskEntryForm, UserRegistrationForm
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 def index(request):
@@ -13,7 +14,7 @@ def index(request):
     }
     return render(request,"taskManagement/taskmanagementHome.html",context=context)
 
-def new(request):
+def newTask(request):
     if request.method == 'POST':
         form = TaskEntryForm(request.POST)
         if form.is_valid():
@@ -33,6 +34,33 @@ def new(request):
         "form": form
     }
     return render(request, "taskManagement/entryForm.html", context)
+
+def newUser(request):
+    if request.method == 'POST':        
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            # ['firstName', 'lastName', 'contactNumber', 'email', 'password']
+            data = form.changed_data
+            User.objects.create(
+                firstName=form[data[0]].value(),
+                lastName=form[data[1]].value(),
+                email=form[data[3]].value(),
+                contactNumber = data[2],
+                username = f'{form[data[0]].value()}{form[data[1]].value()}',
+                password = make_password(form[data[4]].value())
+            )
+  
+            return HttpResponse(f"<h1>Successfully created </h1>")
+    else:
+        form = UserRegistrationForm()
+
+    context = {
+        "title": "New User Creation",
+        "form": form
+    }
+    return render(request, "taskManagement/newUserForm.html", context)
+
+
 
 
 

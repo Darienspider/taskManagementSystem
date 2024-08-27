@@ -58,8 +58,11 @@ ROOT_URLCONF = 'taskManagementSystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'taskManagement/templates'),
-                 os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+                os.path.join(BASE_DIR, 'taskManagement/templates'),
+                os.path.join(BASE_DIR, 'taskManagementSystem/templates'),
+                os.path.join(BASE_DIR, 'templates')
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,6 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/tasks/'
+AUTH_USER_MODEL = 'taskManagement.User'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 
 # Internationalization
@@ -123,7 +132,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    "/var/www/static/",
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

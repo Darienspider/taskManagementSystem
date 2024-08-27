@@ -6,11 +6,12 @@ Key Features:
 User Authentication:
 
 
-TODO: Implement user registration and login so that users can manage their own tasks.
-Task Creation and Management:
+TODO: Implement [user registration] and [login] so that users can manage their own tasks. // COMPLETED
+Task Creation and Management: 
 
 
-TODO: Allow users to create, edit, and delete tasks.
+
+TODO: Allow users to [create], edit, and delete tasks.
 Include fields for task title, description, due date, and priority level.
 Task Organization:
 
