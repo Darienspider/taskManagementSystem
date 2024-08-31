@@ -6,7 +6,7 @@ Develop a Personal Task Management System where users can create, track, and man
 Task Prioritization:
 
 
-- [ ]  Allow users to assign priority levels (e.g., high, medium, low) and visually distinguish tasks based on priority.
+- [x]  Allow users to assign priority levels (e.g., high, medium, low) and visually distinguish tasks based on priority.
 Recurring Tasks:
 
 
