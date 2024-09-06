@@ -10,6 +10,7 @@ class Task(models.Model):
     title = models.TextField(max_length=250)
     description = models.TextField(max_length=250)
     due_date = models.DateTimeField(default=tz.now())
+    
     priority_choices = [
         ('High','High'),
         ('Medium','Medium'),

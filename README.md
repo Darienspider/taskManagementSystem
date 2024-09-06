@@ -37,12 +37,12 @@ while remaining achievable within a typical capstone timeframe.
 - [x]  Implement [user registration] and [login] so that users can manage their own tasks.
 
 ### Task Creation and Management: 
-- [ ]  Allow users to create, edit, and delete tasks.
-- [ ]  Include fields for task title, description, due date, and priority level.
+- [x]  Allow users to create, edit, and delete tasks.
+- [x]  Include fields for task title, description, due date, and priority level.
 Task Organization:
 
 
-- [ ]  Enable users to categorize tasks (e.g., work, personal, shopping) and view tasks by category.
+- [x]  Enable users to categorize tasks (e.g., work, personal, shopping) and view tasks by category.
 Implement sorting and filtering options (e.g., by due date, priority).
 Reminders and Notifications:
 

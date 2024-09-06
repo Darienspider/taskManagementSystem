@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView as AuthLoginView
-
+from django.contrib.auth import logout
 def home (request):
     context = {
         "title":" Task Management System"
@@ -24,4 +24,11 @@ def loginView (AuthLoginView):
     def form_valid(self, form):
         response = super().form_valid(form)
         return redirect('/tasks/') 
-    
+
+def logoutView(request):
+    context = {
+        "title":"Logout"
+    }
+    # force logout user
+    logout(request)
+    return render(request,"taskManagementSystem/logout.html",context=context)

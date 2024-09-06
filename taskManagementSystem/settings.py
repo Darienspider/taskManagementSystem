@@ -110,6 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = 'login'
+
 LOGIN_REDIRECT_URL = '/tasks/'
 AUTH_USER_MODEL = 'taskManagement.User'
 AUTHENTICATION_BACKENDS = [

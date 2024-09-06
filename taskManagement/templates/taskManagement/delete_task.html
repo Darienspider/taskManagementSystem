@@ -1,0 +1,38 @@
+{% extends "taskManagement/main.html" %}
+
+{% block navigation%}
+{% include "taskManagement/navigation.html"%}
+{% endblock %}
+
+{% block content %}
+<h2>Task removed </h2>
+<p> The task with the following details have been removed </p> 
+
+<table>
+    <tr>
+        <th> Title </th>
+        <th> Description </th>
+        <th> Due Date  </th>
+        <th> Priority </th>
+        <th> Category </th>
+        <th> Creator </th>
+    </tr>
+    <tr>
+        <td> {{task.title}}  </td>
+        <td> {{task.description}}  </td>
+        <td> {{task.due_date}}  </td>
+        <td> {{task.priority}}  </td>
+        <td> {{task.category}}  </td>
+        <td> {{task.creator}}  </td>
+    </tr>
+</table>
+
+
+<h1>Delete Task</h1>
+<p>Are you sure you want to delete "{{ task }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+    <a href="{% url 'Home' %}">Cancel</a>
+</form>
+{% endblock %}
