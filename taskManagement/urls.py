@@ -6,5 +6,4 @@ urlpatterns = [
     path('',view=home, name='Home'),
     path('new/',view=newTask, name ='entry'),
     path('home/',view=tmHome, name= "TaskManagementHome"),
-
 ]

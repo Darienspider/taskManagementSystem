@@ -7,6 +7,20 @@
 
 {% block content %}
 <h1> Welcome to the Task Management System Homepage<h1> 
-<p style="font-size=small"> The goal of this project is to provide users with a way to organize their tasks in a more effective and effecient manner <p> 
+<p style="font-size=small"> This screen will dynamically update as you create or are assigned tasks, so check this site regularly for updates <p> 
+<h2> Assigned Tasks </h2>
+    <ul id="assigned_tasks">
+        {% for tasks in assigned_tasks%}
+            <li> {{tasks}} - {{tasks.due_date}} </li>
+        {% endfor %}
+    </ul>
+
+
+<h2> Incomplete Tasks </h2>
+<ul id ="incomplete_tasks">
+{% for tasks in Incomplete_tasks%}
+    <li> {{tasks}} - {{tasks.due_date}} </li>
+{% endfor %}
+</ul>
 
 {% endblock %}

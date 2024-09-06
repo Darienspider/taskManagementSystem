@@ -59,3 +59,29 @@ p {
 #nav_logo {
     width:50%;
 }
+
+
+
+#registration_button {
+    padding: 1px;
+    text-decoration: none;
+    border: 2px solid ; /* Adds a blue border */
+    border-radius: 5px;     /* Rounds the corners */
+    font-weight: bold;      /* Makes the text bold */
+    transition: background-color 0.3s; /* Adds a smooth transition effect */
+    width: 60px;
+
+}
+
+
+
+#submit {
+    padding: 2px;
+    text-decoration: none;
+    border: 2px solid ; /* Adds a blue border */
+    border-radius: 5px;     /* Rounds the corners */
+    font-weight: bold;      /* Makes the text bold */
+    transition: background-color 0.3s; /* Adds a smooth transition effect */
+    text-align: center;
+    width: 60px;
+}

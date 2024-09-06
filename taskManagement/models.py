@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 import django.utils.timezone as tz
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from taskManagementSystem import settings
 
 # Create your models here.
 class Task(models.Model):
@@ -20,9 +21,20 @@ class Task(models.Model):
         ('Personal','Personal'),
         ('Work','Work'),
         ('None','None')
-
     ]
-    category = models.CharField(max_length= 10,choices=category_choices,default='None')
+    category = models.CharField(max_length= 24,choices=category_choices,default='None')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='task_creator', on_delete=models.CASCADE, default = 1)
+    
+    status_choices = [
+        ('completed','completed'),
+        ('In Progress','In Progress'),
+        ('Incomplete','Incomplete'),
+    ]
+    
+    
+    status = models.CharField(max_length= 24,choices=status_choices,default='Incomplete')
+
+
     def __str__(self):
         return self.title
     
@@ -56,8 +68,9 @@ class User(AbstractUser):
     notifications_enabled = models.BooleanField(default=True)
     bio = models.TextField(null=True, blank=True)
     contactNumber = models.CharField(max_length=15, null=True, blank=True)
+    
     assigned_tasks = models.ManyToManyField(Task, related_name='assigned_users', blank=True)
-    created_tasks = models.ForeignKey(Task, related_name='creator', blank=True, on_delete=models.CASCADE, null=True)
+    created_tasks = models.ForeignKey(Task, related_name='task_created_by', blank=True, on_delete=models.CASCADE, null=True)
     email = models.EmailField(null=True)
 
     def __str__(self):
