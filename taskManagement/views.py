@@ -21,6 +21,24 @@ def index(request):
     }
     return render(request,"taskManagement/taskmanagementHome.html",context=context)
 
+
+@login_required(login_url='../login/')
+def managerView(request):
+    # get tasks and all of the users assigned to it
+    managers = User.objects.filter(groups__name__in =['Manager'])
+    all_users = User.objects.all()
+    assigned_tasks = Task.objects.exclude(assigned_users__in=managers).filter(status__in = ['Incomplete','In Progress']).filter(assigned_users__in = all_users)
+    unassigned_tasks = Assignment.objects.filter(assigned_user__isnull=True).select_related('task')  # Optimize queries
+    context = {
+        "title":"Manager Dashboard",
+        'assigned_tasks': assigned_tasks,
+        'unassigned_tasks': unassigned_tasks,
+
+        
+    }
+    return render(request,"taskManagement/managerView.html",context=context)
+
+
 @login_required(login_url='../login/')
 def newTask(request):
     if request.method == 'POST':
@@ -35,8 +53,8 @@ def newTask(request):
                 priority = form.cleaned_data["priority"],
             )
             new_task.save()
-            
-
+            assigned_user = form.cleaned_data['assigned_to']
+            Assignment.objects.create(task=new_task, assigned_user=assigned_user)
             context = {
                 "title": "New Task Confirmed",
             }
@@ -50,9 +68,6 @@ def newTask(request):
         "form": form
     }
     return render(request, "taskManagement/entryForm.html", context)
-
-
-
 
 def newUser(request):
     if request.method == 'POST':        
@@ -80,8 +95,6 @@ def newUser(request):
     return render(request, "taskManagement/newUserForm.html", context)
 
 
-
-
 @login_required(login_url='../login/')
 def home (request):
     created_tasks = Task.objects.filter(creator=request.user)
@@ -101,8 +114,7 @@ def home (request):
     }
     return render(request,"taskManagement/home.html",context=context)
 
-
-@login_required
+@login_required(login_url='../login/')
 def update_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     
@@ -116,6 +128,7 @@ def update_task(request, pk):
             updated_task.save()  # Save the task with the current user assigned
             return redirect('Home')  # Redirect to the homepage or another page
     else:
+        # TODO: remove managers from list of users to select for assignments
         form = TaskEntryForm(instance=task)
     
     context = {
@@ -125,8 +138,7 @@ def update_task(request, pk):
     }
     return render(request, 'taskManagement/update_task.html', context)
 
-
-@login_required
+@login_required(login_url='../login/')
 def delete_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == 'POST':

@@ -9,6 +9,12 @@
                 {% if request.user.is_authenticated %}
                 <li> <a href="/tasks"> Tasks </a> </li>
                 {% endif %} 
+                {% comment %} if user is a manager, allow the link assign tasks to show {% endcomment %}
+                {% for group in request.user.groups.all %}
+                    {% if group.name == "Manager" %}
+                        <li> <a href="/manager">{{ group.name }} Dashboard </li>
+                    {% endif %}
+                {% endfor %}
             <!-- Additional navigation items for this specific page can go here -->
             </ul>
         </div>

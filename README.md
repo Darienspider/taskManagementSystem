@@ -44,20 +44,19 @@ Task Organization:
 
 - [x]  Enable users to categorize tasks (e.g., work, personal, shopping) and view tasks by category.
 Implement sorting and filtering options (e.g., by due date, priority).
+
 Reminders and Notifications:
-
 - [ ]  Allow users to set reminders for tasks and send email or in-app notifications when due dates approach.
+
 Task Status Tracking:
-
-
-- [ ]  Provide options to mark tasks as completed or in-progress.
+- [x]  Provide options to mark tasks as completed or in-progress.
 
 - [ ]  Display a dashboard showing completed tasks and upcoming deadlines.
 
 ### Task Prioritization:
 
 
-- [ ]  Allow users to assign priority levels (e.g., high, medium, low) and visually distinguish tasks based on priority.
+- [x]  Allow users to assign priority levels (e.g., high, medium, low) and visually distinguish tasks based on priority.
 Recurring Tasks:
 
 
@@ -73,7 +72,7 @@ Integration with Calendar:
 Mobile Compatibility:
 
 
-- [ ]  Ensure the application is responsive or develop a basic mobile app version if desired.
+- [x]  Ensure the application is responsive or develop a basic mobile app version if desired.
 
 ## Tech Stack  
 **Client:** TypeScript, React, Next.js  

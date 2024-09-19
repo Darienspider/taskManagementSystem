@@ -10,3 +10,5 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(Task)
 admin.site.register(User)
+admin.site.register(Assignment)
+

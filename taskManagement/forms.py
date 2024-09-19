@@ -1,13 +1,15 @@
 from django import forms
 from .models import Task, User
+from django.contrib.auth.models import Group
 
 class TaskEntryForm(forms.ModelForm):
+    manager_group = Group.objects.get(name="Manager")
     title = forms.CharField(label="Task Title", max_length=100)
     description = forms.CharField(label="Task Description", max_length=100)
     due_date = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
     category = forms.ChoiceField(label="Category", choices=[i for i in Task.category_choices], required=False)
     status = forms.ChoiceField(label='Status',choices =[i for i in Task.status_choices], required=False)
-    assigned_to = forms.ModelChoiceField (label= "Assignee", queryset=User.objects.all(), required=True)
+    assigned_to = forms.ModelChoiceField (label= "Assignee", queryset=User.objects.exclude(groups=manager_group), required=False,initial=None)
     priority = forms.ChoiceField (label= "Assigned", choices= [i for i in Task.priority_choices], required=True)
 
 
