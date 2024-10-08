@@ -45,31 +45,6 @@
         </ul>
 </div>
 
-<div class="container-fluid">
-    <h2> Incomplete Tasks </h2>
-    <ul id ="incomplete_tasks">
-        {% for task in Incomplete_tasks %}
-                <li class= {{task.priority}}>
-                {{ task }} - {{ task.due_date }} 
-                <a href="{% url 'update_task' task.task_ID %}">Update</a>
-                <a href="{% url 'delete_task' task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-
-<div class="container-fluid">
-    <h2> Tasks In Progress </h2>
-        <ul id ="inprogress_tasks">
-            {% for task in in_progress %}
-                <li class={{task.priority}}>
-                    {{ task }} - {{ task.due_date }}
-                    <a href="{% url 'update_task' task.task_ID %}">Update</a>
-                    <a href="{% url 'delete_task' task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
-                </li>
-            {% endfor %}
-        </ul>
-</div>
 
 <div class="container-fluid">
     <h2> Completed Tasks </h2>

@@ -84,7 +84,7 @@ def newUser(request):
                 password = make_password(form[data[4]].value())
             )
   
-            return HttpResponse(f"<h1>Successfully created </h1>")
+            return HttpResponse(f'<h1>Successfully created {form[data[0]].value()}{form[data[1]].value()} </h1></br> <a href="/home"> Return Home </a>')
     else:
         form = UserRegistrationForm()
 
@@ -97,17 +97,14 @@ def newUser(request):
 
 @login_required(login_url='../login/')
 def home (request):
-    created_tasks = Task.objects.filter(creator=request.user)
+    created_tasks = Task.objects.filter(creator=request.user,status__in=['Incomplete','In Progress'])
     assigned_tasks = Task.objects.filter(assigned_users = request.user, status__in=['Incomplete','In Progress'])
-    incompleted_tasks_by_user = Task.objects.filter(status ='Incomplete',assigned_users=request.user)
     completed_tasks = Task.objects.filter(status ='completed', assigned_users= request.user )
     inprogress_tasks = Task.objects.filter(assigned_users = request.user, status__in=['In Progress'])
-
     user_tasks = created_tasks | assigned_tasks
     context = {
         "title":" Task Management",
         "assigned_tasks": assigned_tasks,
-        "Incomplete_tasks":incompleted_tasks_by_user,
         "completed_tasks" :completed_tasks,
         "in_progress":inprogress_tasks,
         "created_tasks":created_tasks

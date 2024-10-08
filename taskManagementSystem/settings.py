@@ -12,7 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import socket
 
+def get_localIPaddress():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    # connect() for UDP doesn't send packets
+    s.connect(('10.0.0.0', 0))  
+    return (s.getsockname()[0])
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +32,8 @@ SECRET_KEY = 'django-insecure-s3j4wns8q02$zvu2$2(&6)q9*71w^14%p8b^u4r!l3zbf$j=xc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# allows server to be used via ipaddress or hostname when ran with manage.py
+ALLOWED_HOSTS = [get_localIPaddress(), socket.gethostname()]
 
 
 # Application definition
