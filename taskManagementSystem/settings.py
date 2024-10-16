@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-s3j4wns8q02$zvu2$2(&6)q9*71w^14%p8b^u4r!l3zbf$j=xc
 DEBUG = True
 
 # allows server to be used via ipaddress or hostname when ran with manage.py
-ALLOWED_HOSTS = [get_localIPaddress(), socket.gethostname()]
+ALLOWED_HOSTS = [get_localIPaddress(), socket.gethostname(),'localhost','127.0.0.1']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # my apps
     'taskManagement',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

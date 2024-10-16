@@ -29,9 +29,10 @@
                     {{ assignment.task }} - {{ assignment.task.due_date }} 
                     <a href="{% url 'update_task' assignment.task.task_ID %}">Update</a>
                     <a href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
+                    {{ assignment}}
                 </li>
             {% endfor %}
         </ul>
 </div>
-
+<a href="{% url 'new_task' %}" id="new_task_button"> Create New Task </a>
 {% endblock %}

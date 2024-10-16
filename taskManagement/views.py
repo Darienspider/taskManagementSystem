@@ -53,6 +53,7 @@ def newTask(request):
                 priority = form.cleaned_data["priority"],
             )
             new_task.save()
+
             assigned_user = form.cleaned_data['assigned_to']
             Assignment.objects.create(task=new_task, assigned_user=assigned_user)
             context = {
@@ -98,10 +99,11 @@ def newUser(request):
 @login_required(login_url='../login/')
 def home (request):
     created_tasks = Task.objects.filter(creator=request.user,status__in=['Incomplete','In Progress'])
-    assigned_tasks = Task.objects.filter(assigned_users = request.user, status__in=['Incomplete','In Progress'])
+    assigned_tasks = Assignment.objects.filter(assigned_user = request.user)
+    # assigned_tasks = Task.objects.filter(assigned_users = request.user, status__in=['Incomplete','In Progress'])
     completed_tasks = Task.objects.filter(status ='completed', assigned_users= request.user )
     inprogress_tasks = Task.objects.filter(assigned_users = request.user, status__in=['In Progress'])
-    user_tasks = created_tasks | assigned_tasks
+    # user_tasks = created_tasks | assigned_tasks
     context = {
         "title":" Task Management",
         "assigned_tasks": assigned_tasks,
@@ -114,6 +116,7 @@ def home (request):
 @login_required(login_url='../login/')
 def update_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
+    assignment = Assignment.objects.filter(task=task).first() 
     
     if request.method == 'POST':
         form = TaskEntryForm(request.POST, instance=task)
@@ -122,6 +125,10 @@ def update_task(request, pk):
             # Add the current user to the assigned_users if not already present
             if request.user not in updated_task.assigned_users.all():
                 updated_task.assigned_users.add(request.user)
+            
+            if assignment:
+                assignment.assigned_user = form.cleaned_data['assigned_to']
+                assignment.save()
             updated_task.save()  # Save the task with the current user assigned
             return redirect('Home')  # Redirect to the homepage or another page
     else:
