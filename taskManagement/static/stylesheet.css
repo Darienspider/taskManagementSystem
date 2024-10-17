@@ -97,8 +97,10 @@ p {
 
 }
 
-
-
+h2 { 
+    text-decoration: underline;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 #submit {
     padding: 2px;
@@ -119,14 +121,44 @@ p {
     transition: background-color 0.3s; /* Adds a smooth transition effect */
     width: 100px;
     margin-left: 100px;
+    margin-top: 40px;
 }
 
-li.Low  {
+
+/* PRIORITIES  */
+td.Low  {
     color:green;
 }
-li.High  {
+td.High  {
     color:red;
 }
-li.Medium  {
+td.Medium  {
     color:yellow;
+    
+}
+
+
+/* STATUS */
+#completed {
+    text-decoration: line-through;
+}
+
+/* TABLES */
+table{
+    height: 100px;
+    width: 70%;
+    margin-bottom: 40px; 
+
+}
+th {
+    margin-left: 40px;
+}
+
+table, th, td  {
+    border: 2px solid;
+    text-align: center;
+}
+
+td {
+    margin-left : 50px;
 }

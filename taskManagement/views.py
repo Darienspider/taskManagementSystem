@@ -27,12 +27,15 @@ def managerView(request):
     # get tasks and all of the users assigned to it
     managers = User.objects.filter(groups__name__in =['Manager'])
     all_users = User.objects.all()
-    assigned_tasks = Task.objects.exclude(assigned_users__in=managers).filter(status__in = ['Incomplete','In Progress']).filter(assigned_users__in = all_users)
+    created_tasks = Assignment.objects.select_related('task')
+    assigned_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
+
     unassigned_tasks = Assignment.objects.filter(assigned_user__isnull=True).select_related('task')  # Optimize queries
     context = {
         "title":"Manager Dashboard",
         'assigned_tasks': assigned_tasks,
         'unassigned_tasks': unassigned_tasks,
+        'created_tasks':created_tasks
 
         
     }
@@ -98,10 +101,10 @@ def newUser(request):
 
 @login_required(login_url='../login/')
 def home (request):
-    created_tasks = Task.objects.filter(creator=request.user,status__in=['Incomplete','In Progress'])
-    assigned_tasks = Assignment.objects.filter(assigned_user = request.user)
-    # assigned_tasks = Task.objects.filter(assigned_users = request.user, status__in=['Incomplete','In Progress'])
-    completed_tasks = Task.objects.filter(status ='completed', assigned_users= request.user )
+    created_tasks = Assignment.objects.select_related('task')
+    assigned_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
+    # completed_tasks = Task.objects.filter(status ='completed', assigned_users= request.user )
+    completed_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
     inprogress_tasks = Task.objects.filter(assigned_users = request.user, status__in=['In Progress'])
     # user_tasks = created_tasks | assigned_tasks
     context = {

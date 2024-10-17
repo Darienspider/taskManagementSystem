@@ -7,32 +7,109 @@
 {% block content %}
 <h1> Welcome to the Manager Dashboard </h1> 
 <p> You are currently signed in as a manager.</p>
+
+<div class="container-fluid">
+    <h2> Created Tasks </h2>
+    <table>
+        <tr>
+            <th> Created by </th>
+            <th> Task Title </th>
+            <th> Task Description </th>
+            <th> Task Due Date </th>
+            <th> Assigned To </th>
+            <th> Task Priority </th>
+
+            <th> Update </th>
+            <th> Delete </th>
+        </tr>
+        {% for assignment in created_tasks %}
+        {% if assignment.task.status == 'In Progress' or assignment.task.status == 'Incomplete' %}
+            {% if assignment.task.creator == request.user %}
+            <tr >
+                <td> {{assignment.task.creator}}</td>
+                <td> {{ assignment.task }} </td>
+                <td> {{ assignment.task.description }} </td>
+                <td> {{ assignment.task.due_date }}</td>
+                <td> {{assignment.assigned_user}} </td>
+
+                <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
+
+                <td> <a href="{% url 'update_task' assignment.task.task_ID %}">Update</a> </td>
+                <td> <a href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a> </td>
+            </tr>
+            {%endif%}
+        {%endif%}
+        {%endfor%}
+    </table>
+
+
+</div>
+
+
+
 <div class="container-fluid">
     <h2> Assigned Tasks </h2>
-        <ul id="assigned_tasks">
-            {% for task in assigned_tasks %}
-                <li class= {{task.priority}}>
-                    {{ task }} - {{ task.due_date }} 
-                    <a href="{% url 'update_task' task.task_ID %}">Update</a>
-                    <a href="{% url 'delete_task' task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <table>
+        <tr>
+            <th> Assigned to </th>
+            <th> Task Title </th>
+            <th> Task Description </th>
+            <th> Task Due Date </th>
+            <th> Task Priority </th>
+
+            <th> Update </th>
+            <th> Delete </th>
+        </tr>
+        {% for assignment in assigned_tasks %}
+        {% if assignment.task.status == 'In Progress' or assignment.task.status == 'Incomplete' and assignment.assigned_user != null%}
+
+        <tr >
+            <td> {{assignment.assigned_user}}</td>
+            <td> {{ assignment.task }} </td>
+            <td> {{ assignment.task.description }} </td>
+            <td> {{ assignment.task.due_date }}</td>
+            <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
+
+            <td> <a href="{% url 'update_task' assignment.task.task_ID %}">Update</a> </td>
+            <td> <a href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a> </td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+    </table>
+
 </div>
 
 
 <div class="container-fluid">
     <h2> Unassigned Tasks </h2>
-        <ul id="unassigned_tasks">
-            {% for assignment in unassigned_tasks %}
-                <li class= {{task.priority}}>
-                    {{ assignment.task }} - {{ assignment.task.due_date }} 
-                    <a href="{% url 'update_task' assignment.task.task_ID %}">Update</a>
-                    <a href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a>
-                    {{ assignment}}
-                </li>
-            {% endfor %}
-        </ul>
+    <table>
+        <tr>
+            <th> Created By </th>
+            <th> Task Title </th>
+            <th> Task Description </th>
+            <th> Task Due Date </th>
+            <th> Task Priority </th>
+
+            <th> Update </th>
+            <th> Delete </th>
+        </tr>
+        {% for assignment in unassigned_tasks %}
+        <tr >
+            <td> {{ assignment.task.creator }} </td>
+            <td> {{ assignment.task }} </td>
+            <td> {{ assignment.task.description }} </td>
+            <td> {{ assignment.task.due_date }}</td>
+            <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
+
+            <td> <a href="{% url 'update_task' assignment.task.task_ID %}">Update</a> </td>
+            <td> <a href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a> </td>
+        </tr>
+        {%endfor%}
+    </table>
+
 </div>
 <a href="{% url 'new_task' %}" id="new_task_button"> Create New Task </a>
+
+<br>
+
 {% endblock %}

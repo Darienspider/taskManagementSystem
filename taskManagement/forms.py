@@ -12,7 +12,6 @@ class TaskEntryForm(forms.ModelForm):
     assigned_to = forms.ModelChoiceField (label= "Assignee", queryset=User.objects.exclude(groups=manager_group), required=False,initial=None)
     priority = forms.ChoiceField (label= "Assigned", choices= [i for i in Task.priority_choices], required=True)
 
-
     class Meta:
         model = Task
         fields = ['title', 'description', 'due_date', 'category','status','assigned_to', 'priority']  # Ensure these fields match the Task model
