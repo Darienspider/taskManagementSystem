@@ -5,6 +5,11 @@ body {
     background-color: black;
 }
 
+#content-block{
+    background-color: green;
+    margin: 0 auto;
+}
+
 nav {
     background-color: #333;
     color: #fff;
@@ -62,7 +67,7 @@ p {
     background-image: url('/static/logo.png');
     background-position: center;
     background-repeat: no-repeat;
-    
+
 }
 
 
@@ -134,7 +139,16 @@ td.High  {
 }
 td.Medium  {
     color:yellow;
-    
+}
+
+li.Low  {
+    color:green;
+}
+li.High  {
+    color:red;
+}
+li.Medium  {
+    color:yellow;
 }
 
 
@@ -161,4 +175,12 @@ table, th, td  {
 
 td {
     margin-left : 50px;
+}
+a.table_button{
+    padding: 1px;
+    border-radius: 5px;     /* Rounds the corners */
+    font-weight: bold;      /* Makes the text bold */
+    transition: background-color 0.3s; /* Adds a smooth transition effect */
+    width: 100%;
+    margin: 0;
 }

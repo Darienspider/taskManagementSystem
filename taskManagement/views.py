@@ -29,13 +29,14 @@ def managerView(request):
     all_users = User.objects.all()
     created_tasks = Assignment.objects.select_related('task')
     assigned_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
-
+    completed_tasks = Assignment.objects.select_related('task')
     unassigned_tasks = Assignment.objects.filter(assigned_user__isnull=True).select_related('task')  # Optimize queries
     context = {
         "title":"Manager Dashboard",
         'assigned_tasks': assigned_tasks,
         'unassigned_tasks': unassigned_tasks,
-        'created_tasks':created_tasks
+        'created_tasks':created_tasks,
+        'completed_tasks': completed_tasks,
 
         
     }

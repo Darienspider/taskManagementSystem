@@ -12,13 +12,17 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        {% block navigation %}
-        {% include "taskManagement/navigation.html"%}
-        {% endblock %}
+            {% block navigation %}
+            {% include "taskManagement/navigation.html"%}
+            {% endblock %}
+    
+            <div id = "content-block">
+            
+            {% block content %}
+            {% endblock %}
 
-        
-        {% block content %}
-        {% endblock %}
+             </div>
+
 
 
         
