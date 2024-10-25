@@ -1,0 +1,13 @@
+{% extends "taskManagement/main.html" %}
+
+{% block content %}
+<h1>Update Task</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+    <a href="{% url 'Home' %}">Cancel</a>
+</form>
+
+{% endblock %}

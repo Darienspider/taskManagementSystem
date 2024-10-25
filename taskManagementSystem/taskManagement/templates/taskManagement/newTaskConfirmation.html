@@ -1,0 +1,15 @@
+{% extends "taskManagement/main.html" %}
+
+
+{% block navigation %}
+{% include "taskManagement/navigation.html" %}
+{% endblock %}
+
+{% block content %}
+<h1> Thank you for submitting your task </h1> 
+<p> If you'd like to make another task, please click below: </p>
+<div id = "confirmation_links">
+    <a href="{% url 'new_task' %}" id="new_task_button"> Create New Task </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,185 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+#content-block{
+    margin-left: 40px;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+}
+
+nav ul {
+    list-style: none;
+    margin: 10;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: blue;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+p {
+    /* color: white; */
+    font-size: medium;
+}
+
+.nav_bar {
+    display:flex;
+    justify-content: space-between;
+    height: 40px;
+}
+
+#nav_links  {
+    width:25%;
+    justify-content: space-between;
+}
+
+#nav_logo {
+    width:50%;
+    justify-content: center;
+    color: black;
+    text-align:center;
+    background-image: url('/static/logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+
+#nav_profile {
+    margin-right: 0px;
+    width:25%;
+    color:white;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+
+}
+
+#nav_profile a {
+    text-decoration:  none;
+    color:white;
+    width: 100%;
+}
+
+#nav_profile a:hover {
+    background-color: blue;
+}
+
+#registration_button {
+    padding: 1px;
+    text-decoration: none;
+    border: 2px solid ; /* Adds a blue border */
+    border-radius: 5px;     /* Rounds the corners */
+    font-weight: bold;      /* Makes the text bold */
+    transition: background-color 0.3s; /* Adds a smooth transition effect */
+    width: 60px;
+
+}
+
+h2 { 
+    text-decoration: underline;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#submit {
+    padding: 2px;
+    text-decoration: none;
+    border: 2px solid ; /* Adds a blue border */
+    border-radius: 5px;     /* Rounds the corners */
+    font-weight: bold;      /* Makes the text bold */
+    transition: background-color 0.3s; /* Adds a smooth transition effect */
+    text-align: center;
+    width: 60px;
+}
+
+#new_task_button {
+    padding: 1px;
+    border: 2px solid ; /* Adds a blue border */
+    border-radius: 5px;     /* Rounds the corners */
+    font-weight: bold;      /* Makes the text bold */
+    transition: background-color 0.3s; /* Adds a smooth transition effect */
+    width: 100px;
+    margin-left: 100px;
+    margin-top: 40px;
+}
+
+
+/* PRIORITIES  */
+td.Low  {
+    color:green;
+}
+td.High  {
+    color:red;
+}
+td.Medium  {
+    color:yellow;
+}
+
+li.Low  {
+    color:green;
+}
+li.High  {
+    color:red;
+}
+li.Medium  {
+    color:yellow;
+}
+
+
+/* STATUS */
+#completed {
+    text-decoration: line-through;
+}
+
+/* TABLES */
+table{
+    height: 100px;
+    width: 70%;
+    margin-bottom: 40px; 
+
+}
+th {
+    margin-left: 40px;
+}
+
+table, th, td  {
+    border: 2px solid;
+    text-align: center;
+}
+
+td {
+    margin-left : 50px;
+}
+a.table_button{
+    padding: 1px;
+    border-radius: 5px;     /* Rounds the corners */
+    font-weight: bold;      /* Makes the text bold */
+    transition: background-color 0.3s; /* Adds a smooth transition effect */
+    width: 100%;
+    margin: 0;
+}

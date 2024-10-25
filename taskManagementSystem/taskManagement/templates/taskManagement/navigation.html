@@ -1,0 +1,40 @@
+{% extends "taskManagement/main.html" %}
+
+{% block navigation %}
+<nav>
+    <div class="nav_bar">
+        <div id = "nav_links">
+            <ul>
+                <li> <a href='/home'> Home </a> </li> 
+                {% if request.user.is_authenticated %}
+                <li> <a href="/tasks"> Tasks </a> </li>
+                {% endif %} 
+                {% comment %} if user is a manager, allow the link assign tasks to show {% endcomment %}
+                {% for group in request.user.groups.all %}
+                    {% if group.name == "Manager" %}
+                        <li> <a href="/manager">{{ group.name }} Dashboard </li>
+                    {% endif %}
+
+                {% endfor %}
+            <!-- Additional navigation items for this specific page can go here -->
+            </ul>
+        </div>
+        <div id = "nav_logo">
+        </div>
+
+        <div id ="nav_profile">
+            {% if request.user.is_authenticated %}
+            <a href='../logout/'> Logout  </a>
+            {% else %}
+            <a href='../login/'> Login  </a>
+            {% endif %}
+
+        </div>
+
+
+
+    </div>
+</nav>
+
+{% endblock %}
+

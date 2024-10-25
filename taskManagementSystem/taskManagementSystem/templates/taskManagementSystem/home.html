@@ -1,0 +1,21 @@
+{% extends "taskManagement/main.html" %}
+
+{% block navigation %}
+{% include "taskManagement/navigation.html" %}
+{% endblock %}
+
+
+{% block content %}
+<h1> Welcome to the Task Management System. </h1>
+<h3> Purpose: </h3> 
+<p> The purpose of the task management system you're developing is to help users organize, track, and manage their tasks effectively.</p>
+
+<h3> Key Features </h3>
+<ul>
+    <li> <em> Create and Store Tasks:</em> Users can input tasks into the system with details like title, description, due date, and priority </li>
+    <li> <em> View and Filter Tasks:</em>  The system will display a list of tasks, which can be sorted or filtered based on various criteria such as due date or priority</li>
+    <li> <em> Track Task Progress:</em>  Users can update the status of tasks (e.g., mark tasks as completed) to keep track of their progress. </li>
+    <li> <em> User-friendly Interface:</em>  Through a well-designed web interface, users can easily interact with the task data, add new tasks, and update existing ones. </li>
+    <li> <em> Modular and Extendable:</em>  The system should be built in a way that allows future extensions, such as adding features like task categorization, reminders, or collaboration tools. </li>
+</ul>
+{% endblock %}

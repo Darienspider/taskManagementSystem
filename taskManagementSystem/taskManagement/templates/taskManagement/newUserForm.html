@@ -1,0 +1,11 @@
+{% extends "taskManagement/main.html" %}
+
+{% block content %}
+<h1> New User Registration </h2>
+{% comment %} create a success page (maybe confetti or something) {% endcomment %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

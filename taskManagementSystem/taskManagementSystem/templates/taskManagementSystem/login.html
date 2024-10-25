@@ -1,0 +1,17 @@
+{% extends "taskManagement/main.html" %}
+
+{% block navigation%}
+{% include "taskManagement/navigation.html"%}
+{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div id="button_section">
+        <button type="submit" id="submit">Login</button>
+        <a href='../register/' id= "registration_button", style="">Register</a>
+    </div>
+</form>
+{% endblock %}
