@@ -6,4 +6,4 @@ from .models import *
 
 admin.site.register(Task)
 admin.site.register(Assignment)
-
+admin.site.register(Notification)

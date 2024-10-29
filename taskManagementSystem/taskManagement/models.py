@@ -46,3 +46,18 @@ class Assignment(models.Model):
 
     def __str__(self):
         return f"{self.assigned_user} - {self.task.title}"
+
+class Notification(models.Model):
+    NOTIFICATION_TYPES = [
+        ('info','Info'),
+        ('warning','Warning'),
+        ('alert','Alert'),
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= 'notifications')
+    notification_type = models.CharField(max_length=10, choices=NOTIFICATION_TYPES, default='info')
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f"{self.notification_type}: {self.message}"

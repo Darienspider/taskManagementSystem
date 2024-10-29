@@ -6,7 +6,7 @@ from .forms import TaskEntryForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm  
-
+from .services import *
 
 
 
@@ -56,12 +56,14 @@ def newTask(request):
                 priority = form.cleaned_data["priority"],
             )
             new_task.save()
-
             assigned_user = form.cleaned_data['assigned_to']
             Assignment.objects.create(task=new_task, assigned_user=assigned_user)
             context = {
                 "title": "New Task Confirmed",
             }
+            message = f'New task has been created:  {new_task.task_ID} - {new_task.title}'
+            create_notification(assigned_user, message, notification_type='info')
+            send_email_notification(assigned_user, 'New Task Assigned', message)
 
             return render(request, "taskManagement/newTaskConfirmation.html", context)
     else:
@@ -102,7 +104,14 @@ def newUser(request):
     if request.method == 'POST':  
         form = UserCreationForm(request.POST)  
         if form.is_valid():  
-            form.save()  
+            new_user = form.save()  
+
+            message = f'New user has been created: {new_user.id}'
+            # send email to both request user and newly created user
+            send_email_notification(request.user, 'New User Created', message)
+            send_email_notification(new_user, 'User Account Created ', f'Account ID: {new_user.id}')
+            send_email_notification('shadarien@shadwilliams.dev', 'User Account Created ', f'Account ID: {new_user.id}')
+
             return HttpResponse(f'<h1>Successfully created  </h1></br> <a href="/home"> Return Home </a>')
   
     else:  
