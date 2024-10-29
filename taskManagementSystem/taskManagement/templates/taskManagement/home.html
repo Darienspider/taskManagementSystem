@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+{% load tz %}
 <h1> Welcome to the Task Management System</h1> 
 <p style="font-size:small"> This screen will dynamically update as you create or are assigned tasks, so check this site regularly for updates </p> 
 <p> Each task has a set priority with a default of low. To make this easier to see, each task is color coded as below:
@@ -12,9 +13,7 @@
     <li class="Low"> Low </li>
     <li class="Medium"> Medium </li>
     <li class="High"> High </li>
-
 <p> Note: when changing the priority, this page dynamically update it's color scheme as well.
-
 </ul>
 <div class="container-fluid">
     <h2> Created Tasks </h2>
@@ -26,7 +25,6 @@
             <th> Task Due Date </th>
             <th> Assigned To </th>
             <th> Task Priority </th>
-
             <th> Update </th>
             <th> Delete </th>
         </tr>
@@ -37,11 +35,15 @@
                 <td> {{assignment.task.creator}}</td>
                 <td> {{ assignment.task }} </td>
                 <td> {{ assignment.task.description }} </td>
-                <td> {{ assignment.task.due_date }}</td>
+                <!-- if the due date is < current time show that it is overdue -->
+                {% now "Y-m-d H:i:s" as current_time %}
+                {% if assignment.task.due_date|stringformat:"Y-m-d H:i:s" < current_time %}
+                    <td id="overdue"> OVERDUE {{now}}</td>
+                {% else %}
+                    <td> {{ assignment.task.due_date }} {now}</td>
+                {%endif%}
                 <td> {{assignment.assigned_user}} </td>
-
                 <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
-
                 <td> <a class="table_button"  href="{% url 'update_task' assignment.task.task_ID %}">Update</a> </td>
                 <td> <a class="table_button"  href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a> </td>
             </tr>
@@ -49,11 +51,7 @@
         {%endif%}
         {%endfor%}
     </table>
-
-
 </div>
-
-
 
 <div class="container-fluid">
     <h2> Assigned Tasks </h2>
@@ -64,20 +62,23 @@
             <th> Task Description </th>
             <th> Task Due Date </th>
             <th> Task Priority </th>
-
             <th> Update </th>
             <th> Delete </th>
         </tr>
         {% for assignment in assigned_tasks %}
         {% if assignment.task.status == 'In Progress' or assignment.task.status == 'Incomplete' and assignment.assigned_user != null%}
-
         <tr >
             <td> {{assignment.assigned_user}}</td>
             <td> {{ assignment.task }} </td>
             <td> {{ assignment.task.description }} </td>
-            <td> {{ assignment.task.due_date }}</td>
+            {% now "Y-m-d H:i:s" as current_time %}
+            {% if assignment.task.due_date|stringformat:"Y-m-d H:i:s" < current_time %}
+                <td id="overdue"> OVERDUE {{now}}</td>
+            {% else %}
+                <td> {{ assignment.task.due_date }} {now}</td>
+            {%endif%}
+            <td> {{assignment.assigned_user}} </td>
             <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
-
             <td> <a class="table_button"  href="{% url 'update_task' assignment.task.task_ID %}">Update</a> </td>
             <td> <a class="table_button"  href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a> </td>
         </tr>
@@ -97,7 +98,6 @@
             <th> Task Description </th>
             <th> Task Due Date </th>
             <th> Task Priority </th>
-
             <th> Update </th>
             <th> Delete </th>
         </tr>
@@ -108,9 +108,15 @@
                 <td> {{assignment.assigned_user}}</td>
                 <td> {{ assignment.task }} </td>
                 <td> {{ assignment.task.description }} </td>
-                <td> {{ assignment.task.due_date }}</td>
+                {% now "Y-m-d H:i:s" as current_time %}
+                {% if assignment.task.due_date|stringformat:"Y-m-d H:i:s" < current_time %}
+                    <p> test </p>
+                    <td id="overdue"> OVERDUE </td>
+                {% else %}
+                    <td> {{ assignment.task.due_date }} {now}</td>
+                {%endif%}
+                <td> {{assignment.assigned_user}} </td>
                 <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
-
                 <td > <a class="table_button" href="{% url 'update_task' assignment.task.task_ID %}">Update</a> </td>
                 <td > <a class="table_button" href="{% url 'delete_task' assignment.task.task_ID %}" onclick="return confirm('Are you sure you want to delete this task?');">Delete</a> </td>
             </tr>

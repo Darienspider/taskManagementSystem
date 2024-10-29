@@ -9,6 +9,9 @@ body {
     margin-left: 40px;
 }
 
+td#overdue{
+    color: pink;
+}
 nav {
     background-color: #333;
     color: #fff;
