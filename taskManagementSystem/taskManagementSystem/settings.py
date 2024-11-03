@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # installed Apps
-    'taskManagement'
+    'taskManagement',
+    'django_extensions',
 
 ]
 

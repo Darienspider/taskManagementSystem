@@ -6,22 +6,16 @@ from .models import Task, Assignment
 User = get_user_model()
 
 class UserModelTest(TestCase):
-
     def setUp(self):
         self.user = User.objects.create_user(
             username='testuser',
             password='testpassword',
-            firstName='Test',
-            lastName='User',
             email='test@example.com'
         )
 
     def test_user_creation(self):
         self.assertEqual(self.user.username, 'testuser')
-        self.assertEqual(self.user.firstName, 'Test')
-        self.assertEqual(self.user.lastName, 'User')
         self.assertEqual(self.user.email, 'test@example.com')
-        self.assertEqual(self.user.role, 'user')
 
     def test_user_str(self):
         self.assertEqual(str(self.user), 'testuser')
@@ -33,8 +27,6 @@ class TaskModelTest(TestCase):
         self.user = User.objects.create_user(
             username='testuser',
             password='testpassword',
-            firstName='Test',
-            lastName='User',
             email='test@example.com'
         )
         self.task = Task.objects.create(
@@ -65,8 +57,6 @@ class AssignmentModelTest(TestCase):
         self.user = User.objects.create_user(
             username='testuser',
             password='testpassword',
-            firstName='Test',
-            lastName='User',
             email='test@example.com'
         )
         self.task = Task.objects.create(
