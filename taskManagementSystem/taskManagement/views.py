@@ -108,10 +108,14 @@ def newUser(request):
 
             message = f'New user has been created: {new_user.id}'
             # send email to both request user and newly created user
-            send_email_notification(request.user, 'New User Created', message)
-            send_email_notification(new_user, 'User Account Created ', f'Account ID: {new_user.id}')
-            send_email_notification('shadarien@shadwilliams.dev', 'User Account Created ', f'Account ID: {new_user.id}')
-
+            superusers = User.objects.filter(is_superuser=True)
+            for user in superusers:
+                if isinstance(user, User):
+                    send_email_notification(user, 'User Account Created', f'Account ID: {new_user.id} - {new_user.username}')
+                else:
+                    print(f"Unexpected object type: {type(user)}")  # Debugging line
+            if isinstance(request.user,User) and bool(request.user.email):
+                send_email_notification(user, 'User Account Created', f'Account ID: {new_user.id} - {new_user.username}')
             return HttpResponse(f'<h1>Successfully created  </h1></br> <a href="/home"> Return Home </a>')
   
     else:  
