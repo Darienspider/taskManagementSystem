@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # installed Apps
     'taskManagement',
     'django_extensions',
+    'bootstrap5',
 
 ]
 
