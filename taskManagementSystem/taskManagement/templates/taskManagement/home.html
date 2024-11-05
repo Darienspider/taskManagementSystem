@@ -1,8 +1,6 @@
 {% extends "taskManagement/main.html" %}
 
-{% block navigation %}
-{% include "taskManagement/navigation.html" %}
-{% endblock %}
+
 
 {% block content %}
 {% load tz %}
@@ -36,11 +34,10 @@
                 <td> {{ assignment.task }} </td>
                 <td> {{ assignment.task.description }} </td>
                 <!-- if the due date is < current time show that it is overdue -->
-                {% now "Y-m-d H:i:s" as current_time %}
-                {% if assignment.task.due_date|stringformat:"Y-m-d H:i:s" < current_time %}
-                    <td id="overdue"> OVERDUE {{now}}</td>
+                {% if assignment.is_overdue %}
+                    <td id="overdue"> OVERDUE </td>
                 {% else %}
-                    <td> {{ assignment.task.due_date }} {now}</td>
+                    <td> {{ assignment.task.due_date }}</td>
                 {%endif%}
                 <td> {{assignment.assigned_user}} </td>
                 <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
@@ -72,10 +69,10 @@
                 <td> {{ assignment.task }} </td>
                 <td> {{ assignment.task.description }} </td>
                 {% now "Y-m-d H:i:s" as current_time %}
-                {% if assignment.task.due_date|stringformat:"Y-m-d H:i:s" < current_time %}
-                    <td id="overdue"> OVERDUE {{now}}</td>
+                {% if assignment.is_overdue %}
+                    <td id="overdue"> OVERDUE </td>
                 {% else %}
-                    <td> {{ assignment.task.due_date }} {now}</td>
+                    <td> {{ assignment.task.due_date }} </td>
                 {%endif%}
                 <td class = {{assignment.task.priority}}> {{ assignment.task.priority}} </td>
                 <td> <a class="table_button"  href="{% url 'update_task' assignment.task.task_ID %}">Update</a> </td>

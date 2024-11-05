@@ -7,6 +7,8 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm  
 from .services import *
+import datetime
+from django.utils import timezone
 
 
 
@@ -36,7 +38,6 @@ def managerView(request):
         'unassigned_tasks': unassigned_tasks,
         'created_tasks':created_tasks,
         'completed_tasks': completed_tasks,
-
         
     }
     return render(request,"taskManagement/managerView.html",context=context)
@@ -127,18 +128,30 @@ def newUser(request):
 
 @login_required(login_url='../login/')
 def home (request):
+    timestamp = datetime.datetime.now()
     created_tasks = Assignment.objects.select_related('task')
     assigned_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
     # completed_tasks = Task.objects.filter(status ='completed', assigned_users= request.user )
     completed_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
     inprogress_tasks = Task.objects.filter(assigned_users = request.user, status__in=['In Progress'])
+    current_time = timezone.now()
+
+    for assignment in created_tasks:
+        task_due = assignment.task.due_date
+        assignment.is_overdue = task_due < current_time
+    
+    for assignment in assigned_tasks:
+        task_due = assignment.task.due_date
+        assignment.is_overdue = task_due < current_time
     # user_tasks = created_tasks | assigned_tasks
     context = {
         "title":" Task Management",
         "assigned_tasks": assigned_tasks,
         "completed_tasks" :completed_tasks,
         "in_progress":inprogress_tasks,
-        "created_tasks":created_tasks
+        "created_tasks":created_tasks,
+        'current_time': datetime.datetime.now()
+
     }
     return render(request,"taskManagement/home.html",context=context)
 

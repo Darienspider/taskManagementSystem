@@ -10,7 +10,7 @@ body {
 }
 
 td#overdue{
-    color: pink;
+    color: red;
 }
 nav {
     background-color: #333;
@@ -43,7 +43,9 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px 0;
+    margin-bottom:0px;
 }
+
 
 p {
     /* color: white; */
@@ -71,8 +73,17 @@ p {
     background-repeat: no-repeat;
 
 }
+#nav_logo_large {
+    width:50%;
+    height:100%;
+    justify-content: center;
+    color: black;
+    text-align:center;
+    background-image: url('/static/logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
 
-
+}
 #nav_profile {
     margin-right: 0px;
     width:25%;
@@ -185,4 +196,11 @@ a.table_button{
     transition: background-color 0.3s; /* Adds a smooth transition effect */
     width: 100%;
     margin: 0;
+}
+
+#media_links{
+    justify-content: center;
+    margin: 0 auto;
+    width: 400px;
+    display: flex;
 }
