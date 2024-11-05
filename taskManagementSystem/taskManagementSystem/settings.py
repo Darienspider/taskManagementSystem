@@ -149,3 +149,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'shaypythonsender@gmail.com'
 EMAIL_HOST_PASSWORD = 'mlwq gwtc otgg zzph'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_REDIRECT_URL = '../home/'
