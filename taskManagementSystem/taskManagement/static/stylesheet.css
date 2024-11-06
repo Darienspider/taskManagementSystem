@@ -202,5 +202,5 @@ a.table_button{
     justify-content: center;
     margin: 0 auto;
     width: 400px;
-    display: flex;
+    display:flex;
 }

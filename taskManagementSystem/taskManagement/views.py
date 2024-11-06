@@ -130,7 +130,7 @@ def newUser(request):
 def home (request):
     timestamp = datetime.datetime.now()
     created_tasks = Assignment.objects.select_related('task')
-    assigned_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
+    assigned_tasks = Assignment.objects.select_related('task', 'assigned_user').filter(assigned_user__id=request.user.id)
     # completed_tasks = Task.objects.filter(status ='completed', assigned_users= request.user )
     completed_tasks = Assignment.objects.select_related('task', 'assigned_user').all()
     inprogress_tasks = Task.objects.filter(assigned_users = request.user, status__in=['In Progress'])
